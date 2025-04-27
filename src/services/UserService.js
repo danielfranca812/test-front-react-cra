@@ -1,22 +1,26 @@
-import axios from "axios";
+import { api } from "./api";
 
-class UserService {
-  async list() {
-    const users = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users`);
-    return users;
-  }
-  async get(id) {
-    throw new Error("Not implemented");
-  }
-  async create(data) {
-    throw new Error("Not implemented");
-  }
-  async delete(id) {
-    throw new Error("Not implemented");
-  }
-  async update(id, data) {
-    throw new Error("Not implemented");
-  }
+export async function listUsers() {
+  const { data } = await api.get("/users");
+  return data;
 }
 
-export default UserService;
+export async function findUserby(id) {
+  const { data } = await api.get(`/users/${id}`);
+  return data;
+}
+
+export async function createUser(user) {
+  const { data } = await api.post("/users", user);
+  return data;
+}
+
+export async function deleteUser(id) {
+  const { data } = await api.delete(`/users/${id}`);
+  return data;
+}
+
+export async function updateUser(id, user) {
+  const { data } = await api.put(`/users/${id}`, user);
+  return data;
+}
