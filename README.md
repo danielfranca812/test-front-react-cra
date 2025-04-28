@@ -1,30 +1,42 @@
-----------------------------------
-ESPANHOL
-----------------------------------
+Projeto CRUD de Usuários
 
-## PRUEBA SPS REACT
+## Tecnologias Utilizadas
 
-- Crear un CRUD de usuarios
+- React 18.2.0
+- React Router DOM 6.22.3
+- Axios para comunicação com API REST
+- React Loading para feedback de carregamento
+- CSS nativo para estilizações
 
-## Reglas
+## Funcionalidades
 
-- Crear la página de inicio de sesión (signIn) para autenticar al usuario (usar el usuario previamente registrado para validar).
-- Se puede utilizar cualquier tipo de almacenamiento para guardar el token.
-- Solo será posible registrar y/o visualizar usuarios si el usuario está autenticado.
-- Consumir la API creada anteriormente (test-sps-server).
+- 🔑 Login de usuário com armazenamento de token JWT
+- 📅 Listagem de usuários (rota protegida)
+- 🖊️ Edição de usuário (apenas para Admin)
+- 🔒 Exclusão de usuário (apenas para Admin)
+- 📲 Responsividade básica na interface
+- 🔄 Controle de acesso baseado em tipo de usuário (`admin` ou `default`)
 
+## Como rodar o projeto
 
-----------------------------------
-PORTUGUÊS
-----------------------------------
+1. Clone o repositório.
+2. Instale as dependências:
+   npm install
 
-# SPS REACT TEST
+3. Inicie o servidor de desenvolvimento:
+npm start
 
-- Criar um CRUD de usuários
+## Rotas do Projeto
 
-# Regras
+| `/` | Não | Tela de apresentação (Home) |
+| `/signin` | Não | Tela de Login |
+| `/users` | Sim | Lista de usuários cadastrados |
+| `/users/:userId` | Sim | Edição de um usuário |
 
-- Criar a página de signIn para fazer a autenticação do usuário (Usar o usuário previamente cadastrado para validar)
-- Pode usar qualquer tipo de storage para guardar o token
-- Só será possível cadastrar e/ou visualizar os usuários se estiver autenticado
-- Chamar a API que foi criada anteriormente (test-sps-server)
+## Melhorias Possíveis
+
+- :bar_chart: Paginação na listagem de usuários
+- :globe_with_meridians: Melhor responsividade com media queries
+- :rocket: Componentização de elementos
+
+Desenvolvido para fins de teste e aprendizado.

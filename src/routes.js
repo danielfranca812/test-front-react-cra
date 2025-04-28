@@ -1,28 +1,53 @@
 import { createBrowserRouter } from "react-router-dom";
 
+import { Navbar } from "./services/NavBar";
 import Home from "./pages/Home";
+import SigIn from "./pages/SignIn";
+import UserEdit from "./pages/UserEdit";
 import Users from "./pages/Users";
-import Sigin from "./pages/SignIn";
-import UserEdit, { userLoader } from "./pages/UserEdit";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <>
+        <Navbar />
+        <Home />
+      </>
+    ),
   },
   {
-    path: "/users",
-    element: <Users />,
+    path: "/login",
+    element: (
+      <>
+        <Navbar />
+        <SigIn />
+      </>
+    ),
   },
   {
-    path: "/users/:userId",
-    element: <UserEdit />,
-    loader: userLoader,
-  },
-
-  {
-    path: "/sigin",
-    element: <Sigin />,
+    element: <PrivateRoute />,
+    children: [
+      {
+        path: "/users",
+        element: (
+          <>
+            <Navbar />
+            <Users />
+          </>
+        ),
+      },
+      {
+        path: "/users/:userId",
+        element: (
+          <>
+            <Navbar />
+            <UserEdit />
+          </>
+        ),
+      },
+    ],
   },
 ]);
 
