@@ -1,3 +1,5 @@
+import { Buttons } from "../Button";
+import { Flex } from "../Flex";
 import "./index.css";
 
 export function Navbar() {
@@ -11,41 +13,36 @@ export function Navbar() {
           <a href="/users">Users</a>
         </>
       )}
-      <div
-        style={{ right: 8, position: "absolute", display: "flex", gap: "12px" }}
-      >
+      <Flex justify="flex-end">
         {token === null ? (
           <>
-            <button
-              className="btn"
+            <Buttons
+              className="secondary"
+              children={"SignUp"}
               onClick={() => {
                 window.location.href = "/signup";
               }}
-            >
-              SignUp
-            </button>
-            <button
-              className="btn"
+            />
+            <Buttons
+              className="secondary"
+              children={"SignIn"}
               onClick={() => {
                 window.location.href = "/signin";
               }}
-            >
-              SignIn
-            </button>
+            />
           </>
         ) : (
-          <button
-            className="btn"
+          <Buttons
+            className="secondary"
+            children={"Sair"}
             onClick={() => {
               localStorage.removeItem("token");
               localStorage.removeItem("userAuth");
               window.location.href = "/";
             }}
-          >
-            Sair
-          </button>
+          />
         )}
-      </div>
+      </Flex>
     </nav>
   );
 }

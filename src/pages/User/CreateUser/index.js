@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CreateUser } from "../../services/authService";
-import { Container } from "../../general-components/Container";
-import { Box } from "../../general-components/Box";
-import { Buttons } from "../../general-components/Button";
-import { Inputs } from "../../general-components/Input";
-import { Toast } from "../../general-components/Toast";
+import { CreateUser } from "../../../services/authService";
+import { Container } from "../../../components/Container";
+import { Box } from "../../../components/Box";
+import { Buttons } from "../../../components/Button";
+import { Inputs } from "../../../components/Input";
 import "./index.css";
+import { Toast } from "../../../general-components/Toast";
 
-function SignUp() {
+function UserCreate() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [toast, setToast] = useState(null);
+  const [error, setError] = useState("");
 
   async function handleSignUp(e) {
     e.preventDefault();
@@ -23,15 +23,23 @@ function SignUp() {
       setLoading(true);
       console.log(name, email, password);
       await CreateUser(name, email, password);
-      setToast({ type: "success", message: "Login efetuado com sucesso!" });
       navigate("/users");
     } catch (error) {
       setLoading(false);
-      setToast({ type: "error", message: error.response?.data?.error });
+      setError(error.response?.data?.error ?? "Erro ao fazer SignUp");
     } finally {
       setLoading(false);
     }
   }
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError("");
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   return (
     <Container>
@@ -68,24 +76,19 @@ function SignUp() {
               required
             />
           </div>
-          <Buttons text="Voltar" loading={null} variant="btn-tertiary" />
+          <Buttons variant="btn-tertiary" text="Voltar" loading={null} />
           <Buttons
+            variant="btn-primary"
             text="Cadastrar"
             type="submit"
             disabled={loading}
             loading={loading}
           />
         </form>
-        {toast && (
-          <Toast
-            message={toast.message}
-            type={toast.type}
-            onClose={() => setToast(null)}
-          />
-        )}
       </Box>
+      <Toast error={error} />
     </Container>
   );
 }
 
-export default SignUp;
+export default UserCreate;

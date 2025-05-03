@@ -1,9 +1,14 @@
 import ReactLoading from "react-loading";
 import "./index.css";
 
-export function Buttons({ type, disabled, loading, text }) {
+export function Buttons({
+  loading = null,
+  children,
+  variant = "btn-primary",
+  ...props
+}) {
   return (
-    <button className="btn" type={type} disabled={disabled}>
+    <button className={`btn btn-${variant}`} {...props}>
       {loading ? (
         <ReactLoading
           className="react-loading"
@@ -12,7 +17,7 @@ export function Buttons({ type, disabled, loading, text }) {
           delay={0}
         />
       ) : (
-        <>{text}</>
+        <>{children}</>
       )}
     </button>
   );

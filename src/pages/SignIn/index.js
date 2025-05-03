@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/authService";
-import { Container } from "../../components/Container";
-import { Box } from "../../components/Box";
-import { Buttons } from "../../components/Button";
-import { Inputs } from "../../components/Input";
+import { Buttons } from "../../general-components/Button";
+import { Inputs } from "../../general-components/Input";
+import { Container } from "../../general-components/Container";
+import { Toast } from "../../general-components/Toast";
+import { Box } from "../../general-components/Box";
 import "./index.css";
+import { Flex } from "../../general-components/Flex";
 
 function SignIn() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [toast, setToast] = useState(null);
 
   async function handleSignIn(e) {
     e.preventDefault();
@@ -20,23 +23,15 @@ function SignIn() {
       setLoading(true);
       console.log(email, password);
       await login(email, password);
+      setToast({ type: "success", message: "Login efetuado com sucesso!" });
       navigate("/users");
     } catch (error) {
       setLoading(false);
-      setError(error.response?.data?.error ?? "Erro ao fazer SignIn");
+      setToast({ type: "error", message: error.response?.data?.error });
     } finally {
       setLoading(false);
     }
   }
-
-  useEffect(() => {
-    if (error) {
-      const timer = setTimeout(() => {
-        setError("");
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [error]);
 
   return (
     <Container>
@@ -62,14 +57,24 @@ function SignIn() {
               required
             />
           </div>
-          <Buttons
-            text="Entrar"
-            type="submit"
-            disabled={loading}
-            loading={loading}
-          />
+          <Flex justify="center">
+            <Buttons children="Voltar" variant="tertiary" loading={null} />
+            <Buttons
+              children="Entrar"
+              variant="primary"
+              type="submit"
+              disabled={loading}
+              loading={loading}
+            />
+          </Flex>
         </form>
-        {error.length > 0 && <div className="erro">{error ?? ""}</div>}
+        {toast && (
+          <Toast
+            message={toast.message}
+            type={toast.type}
+            onClose={() => setToast(null)}
+          />
+        )}
       </Box>
     </Container>
   );

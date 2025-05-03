@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { deleteUser, listUsers } from "../../services/UserService";
-import { Container } from "../../components/Container";
-import { Box } from "../../components/Box";
-import { Table } from "../../components/Table";
+import { Container } from "../../general-components/Container";
+import { Box } from "../../general-components/Box";
+import { Table } from "./components/Table";
 import "./index.css";
 
-function Users() {
+function User() {
   const [users, setUsers] = useState([]);
   const [userAuth, setUserAuth] = useState(null);
 
@@ -73,4 +73,4 @@ function Users() {
     </Container>
   );
 }
-export default Users;
+export default User;

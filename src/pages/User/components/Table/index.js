@@ -1,3 +1,4 @@
+import { Buttons } from "../../../../general-components/Button";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
 
@@ -21,15 +22,18 @@ export function Table({ head, data, role, handleDelete }) {
             <td>{user.type}</td>
             {role === "admin" && (
               <td className="action">
-                <button
+                <Buttons
+                  text="✏️"
                   title="Editar"
+                  variant="btn-icon"
                   onClick={() => navigate(`/users/${user.id}`)}
-                >
-                  ✏️
-                </button>
-                <button title="Excluir" onClick={() => handleDelete(user.id)}>
-                  🗑️
-                </button>
+                />
+                <Buttons
+                  text="🗑️"
+                  title="Excluir"
+                  variant="btn-icon"
+                  onClick={() => handleDelete(user.id)}
+                />
               </td>
             )}
           </tr>

@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { Navbar } from "./components/NavBar";
+import { Navbar } from "./general-components/NavBar";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
-import UserEdit from "./pages/Users/UserEdit";
-import Users from "./pages/Users/Users";
+import UserEdit from "./pages/User/EditUser";
+import User from "./pages/User";
 import PrivateRoute from "./PrivateRoute";
 import SignUp from "./pages/SignUp";
 const router = createBrowserRouter([
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
         element: (
           <>
             <Navbar />
-            <Users />
+            <User />
           </>
         ),
       },

@@ -1,7 +1,7 @@
 import React from "react";
-import { Container } from "../../components/Container";
+import { Container } from "../../general-components/Container";
 import "./index.css";
-import { Box } from "../../components/Box";
+import { Box } from "../../general-components/Box";
 
 function Home() {
   const token = localStorage.getItem("token");

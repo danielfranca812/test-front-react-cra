@@ -38,21 +38,6 @@ td {
   border: 1px solid #ddd;
 }
 
-td button {
-  background-color: transparent;
-  color: white;
-  padding: 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: 0.4s all ease-in-out;
-}
-
-td button:hover {
-  transform: scale(125%);
-  background-color: transparent;
-}
-
 .action {
   display: flex;
   justify-content: center;
