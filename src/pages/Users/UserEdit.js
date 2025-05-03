@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactLoading from "react-loading";
 import { useNavigate, useParams } from "react-router-dom";
-import { findUserby, updateUser } from "../services/UserService";
+import { findUserby, updateUser } from "../../services/UserService";
 
 function EditUser() {
   const { userId } = useParams();

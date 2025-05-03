@@ -1,0 +1,30 @@
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #2f3640;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.link {
+  display: block;
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+footer {
+  margin-top: 30px;
+  font-size: 12px;
+  color: #b2bec3;
+}

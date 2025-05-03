@@ -1,0 +1,14 @@
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #2f3640;
+}
+
+.flex-group {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  grid-gap: 8px;
+  align-items: flex-start;
+}

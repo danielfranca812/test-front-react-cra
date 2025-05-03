@@ -1,12 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { Navbar } from "./services/NavBar";
+import { Navbar } from "./components/NavBar";
 import Home from "./pages/Home";
-import SigIn from "./pages/SignIn";
-import UserEdit from "./pages/UserEdit";
-import Users from "./pages/Users";
+import SignIn from "./pages/SignIn";
+import UserEdit from "./pages/Users/UserEdit";
+import Users from "./pages/Users/Users";
 import PrivateRoute from "./PrivateRoute";
-
+import SignUp from "./pages/SignUp";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,11 +18,20 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/login",
+    path: "/signin",
     element: (
       <>
         <Navbar />
-        <SigIn />
+        <SignIn />
+      </>
+    ),
+  },
+  {
+    path: "/signup",
+    element: (
+      <>
+        <Navbar />
+        <SignUp />
       </>
     ),
   },
