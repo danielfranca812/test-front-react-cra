@@ -1,14 +1,11 @@
-.react-loading {
-  width: 24px;
-  height: 24px;
-  margin: 0 auto;
-}
-
-.btn {
-  padding: 10px 16px;
+button.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 24px;
   border: none;
-  border-radius: 6px;
-  font-size: 18px;
+  border-radius: 10px;
+  font-size: 16px;
   cursor: pointer;
   font-weight: 500;
   transition: all 0.3s ease;
@@ -28,17 +25,20 @@
 }
 
 .btn.btn-secondary:hover {
-  background-color: #c7d2fe;
+  background-color: #4138ca;
+  color: white;
 }
 
 .btn.btn-tertiary {
   background-color: transparent;
   color: #4f46e5;
-  border: 2px solid #4f46e5;
+  border: 3px solid #4f46e5;
 }
 
 .btn.btn-tertiary:hover {
-  background-color: #eef2ff;
+  background-color: #4f46e5;
+  border-color: #4f46e5;
+  color: white;
 }
 
 .btn.btn-icon {

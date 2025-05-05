@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { deleteUser, listUsers } from "../../services/UserService";
-import { Container } from "../../general-components/Container";
-import { Box } from "../../general-components/Box";
-import { Table } from "./components/Table";
+
+import { Box } from "../../components/Box";
+import { Button } from "../../components/Button";
+import { Container } from "../../components/Container";
+import { Flex } from "../../components/Flex";
+import { Table } from "../../components/Table";
+import { Title } from "../../components/Title";
+
 import "./index.css";
 
 function User() {
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [userAuth, setUserAuth] = useState(null);
 
@@ -62,13 +69,29 @@ function User() {
   return (
     <Container>
       <Box>
-        <h1>Usuários</h1>
-        <Table
-          head={listHead}
-          data={users}
-          role={userAuth?.type}
-          handleDelete={handleDelete}
-        />
+        <Title level={2} children={"Usuários"} />
+        <Flex direction="column" gap="1rem">
+          <Table
+            head={listHead}
+            data={users}
+            role={userAuth?.type}
+            handleDelete={handleDelete}
+          />
+          {userAuth?.type === "admin" && (
+            <Flex justify="space-between" gap="1rem">
+              <Button
+                children={"Voltar"}
+                variant="tertiary"
+                onClick={() => navigate(-1)}
+              />
+              <Button
+                children={"Adicionar Usuário"}
+                variant="primary"
+                onClick={() => (window.location.href = "/users/create")}
+              />
+            </Flex>
+          )}
+        </Flex>
       </Box>
     </Container>
   );

@@ -1,30 +1,24 @@
-import { Buttons } from "../Button";
+import { Button } from "../Button";
 import { Flex } from "../Flex";
 import "./index.css";
 
 export function Navbar() {
   const token = localStorage.getItem("token");
-  console.log("Token:", token);
 
   return (
     <nav>
-      {token && (
-        <>
-          <a href="/users">Users</a>
-        </>
-      )}
-      <Flex justify="flex-end">
+      <Flex>
         {token === null ? (
           <>
-            <Buttons
-              className="secondary"
+            <Button
+              variant="secondary"
               children={"SignUp"}
               onClick={() => {
                 window.location.href = "/signup";
               }}
             />
-            <Buttons
-              className="secondary"
+            <Button
+              variant="secondary"
               children={"SignIn"}
               onClick={() => {
                 window.location.href = "/signin";
@@ -32,8 +26,8 @@ export function Navbar() {
             />
           </>
         ) : (
-          <Buttons
-            className="secondary"
+          <Button
+            variant="secondary"
             children={"Sair"}
             onClick={() => {
               localStorage.removeItem("token");

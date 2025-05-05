@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CreateUser } from "../../../services/authService";
-import { Container } from "../../../components/Container";
+import { CreateAdmin, CreateUser } from "../../../services/authService";
+
 import { Box } from "../../../components/Box";
-import { Buttons } from "../../../components/Button";
-import { Inputs } from "../../../components/Input";
+import { Button } from "../../../components/Button";
+import { Container } from "../../../components/Container";
+import { Flex } from "../../../components/Flex";
+import { Input } from "../../../components/Input";
+import { Select } from "../../../components/Select";
+import { Title } from "../../../components/Title";
+import { Toast } from "../../../components/Toast";
+
 import "./index.css";
-import { Toast } from "../../../general-components/Toast";
 
 function UserCreate() {
   const navigate = useNavigate();
@@ -14,79 +19,99 @@ function UserCreate() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("user");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [toast, setToast] = useState(null);
 
   async function handleSignUp(e) {
     e.preventDefault();
     try {
       setLoading(true);
-      console.log(name, email, password);
-      await CreateUser(name, email, password);
-      navigate("/users");
+      role === "user"
+        ? await CreateUser(name, email, password)
+        : await CreateAdmin(name, email, password);
+      setToast({ type: "success", message: "usuário criado com sucesso!" });
+      setTimeout(() => {
+        setLoading(false);
+        setRole("user");
+        navigate("/users");
+      }, 2500);
     } catch (error) {
       setLoading(false);
-      setError(error.response?.data?.error ?? "Erro ao fazer SignUp");
-    } finally {
-      setLoading(false);
+      setToast({ type: "error", message: error.response?.data?.error });
     }
   }
-
-  useEffect(() => {
-    if (error) {
-      const timer = setTimeout(() => {
-        setError("");
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [error]);
 
   return (
     <Container>
       <Box>
-        <h1>SignUp</h1>
+        <Title level={2} children="Cadastrar Usuário" />
         <form onSubmit={handleSignUp}>
-          <div className="flex-group">
-            <h5>Nome</h5>
-            <Inputs
+          <Flex direction="column" gap="4px">
+            <Input
+              label="Nome"
+              name="name"
               type="text"
-              placeholder="Digite o seu nome"
               value={name}
+              placeholder="Digite o seu nome"
               onChange={(e) => setName(e.target.value)}
               required
             />
-          </div>
-          <div className="flex-group">
-            <h5>Email</h5>
-            <Inputs
+            <Input
+              label="Email"
+              name="email"
               type="text"
-              placeholder="Digite o seu email"
               value={email}
+              placeholder="Digite o seu email"
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-          </div>
-          <div className="flex-group">
-            <h5>Senha</h5>
-            <Inputs
+            <Input
+              label="Senha"
+              name="password"
               type="password"
-              placeholder="Digite a sua senha"
               value={password}
+              placeholder="Digite a sua senha"
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-          </div>
-          <Buttons variant="btn-tertiary" text="Voltar" loading={null} />
-          <Buttons
-            variant="btn-primary"
-            text="Cadastrar"
-            type="submit"
-            disabled={loading}
-            loading={loading}
-          />
+            <Select
+              label="Tipo de Usuário"
+              name="role"
+              type="select"
+              value={role}
+              options={[
+                { value: "user", label: "Usuário" },
+                { value: "admin", label: "Administrador" },
+              ]}
+              onChange={(e) => setRole(e.target.value)}
+              required
+            />
+          </Flex>
+          <Flex justify="center">
+            <Button
+              children="Voltar"
+              variant="tertiary"
+              loading={null}
+              onClick={() => navigate(-1)}
+            />
+            <Button
+              children="Criar Usuário"
+              variant="primary"
+              type="submit"
+              disabled={loading}
+              loading={loading}
+            />
+          </Flex>
         </form>
       </Box>
-      <Toast error={error} />
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </Container>
   );
 }

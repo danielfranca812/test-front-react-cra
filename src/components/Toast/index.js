@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+
 import "./index.css";
 
 export function Toast({ type, onClose, message }) {

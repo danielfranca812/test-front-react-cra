@@ -15,7 +15,7 @@ Projeto CRUD de Usuários
 - 🖊️ Edição de usuário (apenas para Admin)
 - 🔒 Exclusão de usuário (apenas para Admin)
 - 📲 Responsividade básica na interface
-- 🔄 Controle de acesso baseado em tipo de usuário (`admin` ou `default`)
+- 🔄 Controle de acesso baseado em tipo de usuário (`admin` ou `user`)
 
 ## Como rodar o projeto
 
@@ -24,19 +24,23 @@ Projeto CRUD de Usuários
    npm install
 
 3. Inicie o servidor de desenvolvimento:
-npm start
+   npm start
 
 ## Rotas do Projeto
 
-| `/` | Não | Tela de apresentação (Home) |
-| `/signin` | Não | Tela de Login |
-| `/users` | Sim | Lista de usuários cadastrados |
-| `/users/:userId` | Sim | Edição de um usuário |
+| `/` | Tela de apresentação (Home) |
+| `/signin` | Tela de Login |
+| `/signup` | Tela de Login |
+| `/users` | Lista de usuários cadastrados |
+| `/users/:userId` | Edição de um usuário |
+| `/users/create` | Criação de um usuário |
 
 ## Melhorias Possíveis
 
 - :bar_chart: Paginação na listagem de usuários
 - :globe_with_meridians: Melhor responsividade com media queries
-- :rocket: Componentização de elementos
+- :rocket: utilização do react-query
+- :star: implementação de typescript
+- :sparkles: refatoramento do projeto utilizando vite
 
 Desenvolvido para fins de teste e aprendizado.

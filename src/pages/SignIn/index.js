@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/authService";
-import { Buttons } from "../../general-components/Button";
-import { Inputs } from "../../general-components/Input";
-import { Container } from "../../general-components/Container";
-import { Toast } from "../../general-components/Toast";
-import { Box } from "../../general-components/Box";
+
+import { Box } from "../../components/Box";
+import { Button } from "../../components/Button";
+import { Container } from "../../components/Container";
+import { Flex } from "../../components/Flex";
+import { Input } from "../../components/Input";
+import { Title } from "../../components/Title";
+import { Toast } from "../../components/Toast";
+
 import "./index.css";
-import { Flex } from "../../general-components/Flex";
 
 function SignIn() {
   const navigate = useNavigate();
@@ -21,45 +24,51 @@ function SignIn() {
     e.preventDefault();
     try {
       setLoading(true);
-      console.log(email, password);
       await login(email, password);
       setToast({ type: "success", message: "Login efetuado com sucesso!" });
-      navigate("/users");
+      setTimeout(() => {
+        setLoading(false);
+        navigate("/users");
+      }, 2500);
     } catch (error) {
       setLoading(false);
       setToast({ type: "error", message: error.response?.data?.error });
-    } finally {
-      setLoading(false);
     }
   }
 
   return (
     <Container>
       <Box>
-        <h1>SignIn</h1>
+        <Title level={2} children="SignIn" />
         <form onSubmit={handleSignIn}>
-          <div className="mb">
-            <Inputs
+          <Flex direction="column" gap="4px">
+            <Input
+              label="Email"
+              name="email"
               type="text"
-              placeholder="Email"
               value={email}
+              placeholder="Digite seu email"
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-          </div>
-
-          <div className="mb">
-            <Inputs
+            <Input
+              label="Senha"
+              name="password"
               type="password"
-              placeholder="Senha"
               value={password}
+              placeholder="Digite sua senha"
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-          </div>
+          </Flex>
           <Flex justify="center">
-            <Buttons children="Voltar" variant="tertiary" loading={null} />
-            <Buttons
+            <Button
+              children="Voltar"
+              variant="tertiary"
+              loading={null}
+              onClick={() => navigate(-1)}
+            />
+            <Button
               children="Entrar"
               variant="primary"
               type="submit"

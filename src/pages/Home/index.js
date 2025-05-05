@@ -1,26 +1,32 @@
-import React from "react";
-import { Container } from "../../general-components/Container";
+import { Box } from "../../components/Box";
+import { Container } from "../../components/Container";
+import { Flex } from "../../components/Flex";
+import { Title } from "../../components/Title";
+
 import "./index.css";
-import { Box } from "../../general-components/Box";
 
 function Home() {
   const token = localStorage.getItem("token");
   return (
     <Container>
       <Box>
-        <h1>Bem-vindo ao Teste SPS Group</h1>
-        <p style={{ fontSize: "16px", color: "#636e72", marginBottom: "30px" }}>
-          Este projeto foi desenvolvido para avaliar habilidades em React.js,
+        <Flex direction="column" gap="24px" justify="center">
+          <Title level={2} children="Bem-vindo ao Teste SPS Group" />
+          <Title
+            level={6}
+            children="Este projeto foi desenvolvido para avaliar habilidades em React.js,
           integração de APIs REST, autenticação com JWT e criação de CRUDs
-          simples.
-        </p>
-        {!token && (
-          <div className="flex">
-            <a className="link" href="/signin">
-              SignIn
-            </a>
-          </div>
-        )}
+          simples."
+          />
+
+          {!token && (
+            <Flex gap="12px" justify="center" align="center" direction="column">
+              <a className="link" href="/signin">
+                SignIn
+              </a>
+            </Flex>
+          )}
+        </Flex>
 
         <footer>SPS Group © {new Date().getFullYear()}</footer>
       </Box>

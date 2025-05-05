@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CreateUser } from "../../services/authService";
-import { Container } from "../../general-components/Container";
-import { Box } from "../../general-components/Box";
-import { Buttons } from "../../general-components/Button";
-import { Inputs } from "../../general-components/Input";
-import { Toast } from "../../general-components/Toast";
+
+import { Box } from "../../components/Box";
+import { Button } from "../../components/Button";
+import { Container } from "../../components/Container";
+import { Flex } from "../../components/Flex";
+import { Input } from "../../components/Input";
+import { Title } from "../../components/Title";
+import { Toast } from "../../components/Toast";
+
 import "./index.css";
 
 function SignUp() {
@@ -21,10 +25,14 @@ function SignUp() {
     e.preventDefault();
     try {
       setLoading(true);
-      console.log(name, email, password);
       await CreateUser(name, email, password);
-      setToast({ type: "success", message: "Login efetuado com sucesso!" });
-      navigate("/users");
+      setToast({
+        type: "success",
+        message: "Cadastro efetuado com sucesso! Realizar o login.",
+      });
+      setTimeout(() => {
+        navigate("/signin");
+      }, 2500);
     } catch (error) {
       setLoading(false);
       setToast({ type: "error", message: error.response?.data?.error });
@@ -36,45 +44,52 @@ function SignUp() {
   return (
     <Container>
       <Box>
-        <h1>SignUp</h1>
+        <Title level={2} children="SignUp" />
         <form onSubmit={handleSignUp}>
-          <div className="flex-group">
-            <h5>Nome</h5>
-            <Inputs
+          <Flex direction="column" gap="4px">
+            <Input
+              label="Nome"
+              name="name"
               type="text"
-              placeholder="Digite o seu nome"
               value={name}
+              placeholder="Digite o seu nome"
               onChange={(e) => setName(e.target.value)}
               required
             />
-          </div>
-          <div className="flex-group">
-            <h5>Email</h5>
-            <Inputs
+            <Input
+              label="Email"
+              name="email"
               type="text"
               placeholder="Digite o seu email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-          </div>
-          <div className="flex-group">
-            <h5>Senha</h5>
-            <Inputs
+            <Input
+              label="Senha"
+              name="password"
               type="password"
               placeholder="Digite a sua senha"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-          </div>
-          <Buttons text="Voltar" loading={null} variant="btn-tertiary" />
-          <Buttons
-            text="Cadastrar"
-            type="submit"
-            disabled={loading}
-            loading={loading}
-          />
+          </Flex>
+          <Flex justify="center">
+            <Button
+              variant="tertiary"
+              loading={null}
+              children="Voltar"
+              onClick={() => navigate(-1)}
+            />
+            <Button
+              type="submit"
+              variant="primary"
+              disabled={loading}
+              loading={loading}
+              children="Cadastrar"
+            />
+          </Flex>
         </form>
         {toast && (
           <Toast

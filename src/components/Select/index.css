@@ -1,0 +1,34 @@
+.select-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.select-group label {
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: #333;
+}
+
+.select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.select:focus {
+  border-color: #4f46e5;
+}
+
+.select.error {
+  border-color: #f44336;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 12px;
+  margin-top: 4px;
+}

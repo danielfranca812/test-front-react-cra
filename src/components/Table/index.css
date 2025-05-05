@@ -3,12 +3,12 @@ table {
   max-width: 1440px;
   border-collapse: collapse;
   margin-top: 20px;
-  border: 1px solid #ddd;
+  border: 2px solid #efeeff;
   border-radius: 12px;
 }
 
 thead {
-  background-color: lightgray;
+  background-color: #e2e0ff;
   color: black;
   padding: 10px;
   text-align: left;
@@ -30,12 +30,13 @@ tbody {
 }
 
 tr {
-  border: 1px solid #ddd;
+  border: 1px solid #efeeff;
 }
 
 td {
+  white-space: nowrap;
   padding: 4px;
-  border: 1px solid #ddd;
+  border: 1px solid #efeeff;
 }
 
 .action {
